@@ -9,3 +9,6 @@
 6. 使用Pygame实现
    * pygame基础: https://www.youtube.com/watch?v=y9VG3Pztok8
    * 模型实践: https://www.youtube.com/watch?v=gxAaO2rsdIs
+
+## Process
+Map: https://github.com/Zhonglin1231/Little_Village/blob/main/resource/Map_HongKong.png
