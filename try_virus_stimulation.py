@@ -92,8 +92,10 @@ def show_stats():
 
 # initialize people
 people = [Person() for i in range(num_of_people)]
+myself = people[-1]
+myself.state = "infected"
 STATE_COUNTS["healthy"] = num_of_people
-people[0].state = "infected"
+# people[0].state = "infected"
 STATE_COUNTS["infected"] += 1
 STATE_COUNTS["healthy"] -= 1
 people[1].state = "immune"
@@ -111,9 +113,13 @@ while animating:
     SCREEN.blit(map, (0, 0))
 
     # pygame draws things to the screen
-    for p in people:
+    for p in people[:-1]:
         p.move()
         p.show()
+        
+    myself.x, myself.y = pygame.mouse.get_pos()
+    people[-1].show()
+    
 
     for p in people:
 
@@ -130,7 +136,7 @@ while animating:
                             STATE_COUNTS["infected"] += 1
 
             # self recovery
-            if random.random() < 0.0001:
+            if random.random() < 0.001:
                 p.state = "immune"
                 STATE_COUNTS["infected"] -= 1
                 STATE_COUNTS["immune"] += 1
@@ -143,7 +149,7 @@ while animating:
 
         # immune people return healthy
         if p.state == "immune":
-            if random.random() < 0.00002:
+            if random.random() < 0.0002:
                 p.state = "healthy"
                 STATE_COUNTS["immune"] -= 1
                 STATE_COUNTS["healthy"] +=1
@@ -171,3 +177,16 @@ while animating:
             # escape key closes the animation
             if event.key == pygame.K_ESCAPE:
                 animating = False
+
+
+            # if event.key == pygame.K_UP:
+            #     myself.y -= 10
+            # if event.key == pygame.K_DOWN:
+            #     myself.y += 10
+            # if event.key == pygame.K_LEFT:
+            #     myself.x -= 10
+            # if event.key == pygame.K_RIGHT:
+            #     myself.x += 10
+
+
+                
