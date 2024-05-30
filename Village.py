@@ -118,6 +118,8 @@ class Person:
             new_person = Person(x=self.x, y=self.y, nationality="new", age=0)
         elif self.nationality == "new":
             new_person = Person(x=self.x, y=self.y, nationality="newnew", age=0)
+        else:
+            new_person = Person(x=self.x, y=self.y, age=0)
         village.population.append(new_person)
         village.INFO["Population Size"] += 1
 
