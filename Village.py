@@ -14,7 +14,7 @@ sex_set = ('male', 'female')
 occupation_set = ('worker', 'farmer', 'leader', 'soldier')
 skills_set = ('building', 'farming', 'fighting', 'leading')
 special_status_set = ('sick', 'injured', 'pregnant')
-nationality_set = ('Chinese', 'American', 'British', 'new')
+nationality_set = ('Chinese', 'American', 'British', 'new', 'newnew')
 
 
 COLOR_DEFINITIONS = {
@@ -30,18 +30,19 @@ COLORS = {
     "background": COLOR_DEFINITIONS["grey"],
     "info": COLOR_DEFINITIONS["white"],
     None: COLOR_DEFINITIONS["light_grey"],
-    "new": COLOR_DEFINITIONS["red"]
+    "new": COLOR_DEFINITIONS["red"],
+    "newnew": COLOR_DEFINITIONS["blue"]
 }
 
 class Person:
-    def __init__(self, x=None, y=None, nationality=None):
+    def __init__(self, x=None, y=None, nationality=None, age=None):
         self.x = x if x is not None else random.randint(0, WIDTH)
         self.y = y if y is not None else random.randint(0, HEIGHT)
         self.dx = 0
         self.dy = 0
         self.health = 100
         self.happiness = random.randint(0, 100)
-        self.age = random.randint(0, 100)
+        self.age = age if age is not None else random.randint(0, 100)
         self.sex = random.choice(sex_set)
         self.occupation = random.choice(occupation_set)
         self.skills = random.choice(skills_set)
@@ -113,7 +114,10 @@ class Person:
         self.health -= 30
 
         # create a new person and add to the population
-        new_person = Person(x=self.x, y=self.y, nationality="new")
+        if self.nationality == None:
+            new_person = Person(x=self.x, y=self.y, nationality="new", age=0)
+        elif self.nationality == "new":
+            new_person = Person(x=self.x, y=self.y, nationality="newnew", age=0)
         village.population.append(new_person)
         village.INFO["Population Size"] += 1
 
